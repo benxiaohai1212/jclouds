@@ -89,6 +89,10 @@ public class ScriptBuilder implements Statement, AcceptsStatementVisitor {
       return new ExitInsteadOfReturn(Statements.findPid(pid));
    }
 
+   public static Statement waitForApt(int timeoutSeconds) {
+      return new ExitInsteadOfReturn(Statements.waitForApt(timeoutSeconds));
+   }
+
    public static Statement call(String fn, String... args) {
       return new ExitInsteadOfReturn(Statements.call(fn, args));
    }

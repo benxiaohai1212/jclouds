@@ -125,6 +125,16 @@ public class Statements {
    }
 
    /**
+    * Waits until the APT is ready (no other processes are using it) or the
+    * timeout is reached.
+    * 
+    * @param timeoutSeconds The timeout in seconds (defaults to 10).
+    */
+   public static Statement waitForApt(int timeoutSeconds) {
+      return new Call("waitForApt", String.valueOf(timeoutSeconds));
+   }
+
+   /**
     * Kills the pid and subprocesses related to the variable {@code FOUND_PID}
     * if set.
     * 

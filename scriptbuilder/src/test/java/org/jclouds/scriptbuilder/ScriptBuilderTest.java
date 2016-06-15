@@ -18,6 +18,7 @@ package org.jclouds.scriptbuilder;
 
 import static org.jclouds.scriptbuilder.ScriptBuilder.call;
 import static org.jclouds.scriptbuilder.ScriptBuilder.findPid;
+import static org.jclouds.scriptbuilder.ScriptBuilder.waitForApt;
 import static org.jclouds.scriptbuilder.domain.Statements.appendFile;
 import static org.jclouds.scriptbuilder.domain.Statements.interpret;
 import static org.jclouds.scriptbuilder.domain.Statements.kill;
@@ -91,6 +92,15 @@ public class ScriptBuilderTest {
       assertEquals(
             findPidBuilder.render(OsFamily.UNIX),
             Resources.toString(Resources.getResource("test_find_pid." + ShellToken.SH.to(OsFamily.UNIX)), Charsets.UTF_8));
+   }
+
+   ScriptBuilder waitForAptBuilder = new ScriptBuilder().addStatement(waitForApt(10));
+
+   @Test
+   public void testWaitForApt() throws MalformedURLException, IOException {
+      assertEquals(
+            waitForAptBuilder.render(OsFamily.UNIX),
+            Resources.toString(Resources.getResource("test_wait_for_apt." + ShellToken.SH.to(OsFamily.UNIX)), Charsets.UTF_8));
    }
 
    ScriptBuilder seekAndDestroyBuilder = new ScriptBuilder().addStatement(findPid("{args}")).addStatement(kill());
